@@ -28,3 +28,21 @@ def index():
         books = [Book(*row) for row in cursor]
 
     return render_template('books.html', books=books)
+
+
+@flaskapp.route('/search-demo')
+def search_demo():
+    search_term = request.args.get('search')
+
+    query = (
+        "SELECT * FROM books WHERE name LIKE '%"
+        + search_term
+        + "%'"
+    )
+
+        cursor.execute(query)
+
+        books = [Book(*row) for row in cursor]
+
+    return render_template('books.html', books=books)
+
